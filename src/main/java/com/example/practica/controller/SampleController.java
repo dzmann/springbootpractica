@@ -1,6 +1,7 @@
-package com.example.practica.controler;
+package com.example.practica.controller;
 
 
+import com.example.practica.ResourceNotFoundException;
 import com.example.practica.domain.Person;
 import com.example.practica.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class SampleController {
     }
 
     @GetMapping(value = "/{id}")
-    public Person getById(@PathVariable("id") Long id) throws Exception {
-        return sampleService.getById(id).orElseThrow(() -> new Exception("Not found"));
+    public Person getById(@PathVariable("id") Long id) throws ResourceNotFoundException {
+        return sampleService.getById(id).orElseThrow(() -> new ResourceNotFoundException(String.valueOf(id)));
     }
 
 }
